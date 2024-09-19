@@ -38,19 +38,19 @@ const WeatherApp = () => {
         <div className="weather-cards">
           <div className="weather-card">
             <h3>Temperature</h3>
-            <p>{data.current.temp_c} °C</p>
+            <h4>{data.current.temp_c} °C</h4>
           </div>
           <div className="weather-card">
             <h3>Humidity</h3>
-            <p>{data.current.humidity} %</p>
+            <h4>{data.current.humidity} %</h4>
           </div>
           <div className="weather-card">
             <h3>Condition</h3>
-            <p>{data.current.condition.text}</p>
+            <h4>{data.current.condition.text}</h4>
           </div>
           <div className="weather-card">
             <h3>Wind Speed</h3>
-            <p>{data.current.wind_kph} kph</p>
+            <h4>{data.current.wind_kph} kph</h4>
           </div>
         </div>
       )}
