@@ -9,7 +9,9 @@ const WeatherApp = () => {
   const [searched, setSearched] = useState(false);
 
   const API_KEY = "2405418ad0804f70b25135006242008";
-  const handleSearch = async () => {
+
+  useEffect(()=>{
+    const handleSearch = async () => {
       setLoading(true);
       try {
         const response = await axios.get( `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`);
@@ -20,9 +22,10 @@ const WeatherApp = () => {
         setLoading(false);
       }
   };
-  // useEffect(()=>{
-  //     handleSearch()
-  // },[searched]);
+    if(city.length){
+      handleSearch();
+    }
+  },[searched]);
   return (
     <div className="app">
       <input
@@ -33,7 +36,7 @@ const WeatherApp = () => {
         className="search"
       />
 
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={()=>{setSearched(!searched)}}>Search</button>
 
       {loading && <p>Loading...</p>}
 
