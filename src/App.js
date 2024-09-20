@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './App.css';
 
 const WeatherApp = () => {
   const [city, setCity] = useState(""); 
   const [data, setData] = useState(""); 
-  const [para, setPara] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [searched, setSearched] = useState(false);
 
   const API_KEY = "2405418ad0804f70b25135006242008";
   const handleSearch = async () => {
-    setPara("Loading data…");
-    setData("");
-    try {
-      const response = await axios.get( `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`);
-      setData(response.data);
-    } catch (err) {
-      alert("Failed to fetch weather data");
-    }
-    setPara("");
+      setLoading(true);
+      try {
+        const response = await axios.get( `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`);
+        setData(response.data);
+        setLoading(false);
+      } catch (err) {
+        alert("Failed to fetch weather data");
+        setLoading(false);
+      }
   };
+  // useEffect(()=>{
+  //     handleSearch()
+  // },[searched]);
   return (
     <div className="app">
       <input
@@ -31,7 +35,7 @@ const WeatherApp = () => {
 
       <button onClick={handleSearch}>Search</button>
 
-      {<p>{para}</p>}
+      {loading && <p>Loading...</p>}
 
       {data && (
         <div className="weather-cards">
