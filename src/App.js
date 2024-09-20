@@ -38,7 +38,7 @@ const WeatherApp = () => {
 
       <button onClick={()=>{setSearched(!searched)}}>Search</button>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p>Loading data...</p>}
 
       {data && (
         <div className="weather-cards">
