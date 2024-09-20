@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import './App.css'; // Assuming you have a CSS file for styling
+import './App.css';
 
 const WeatherApp = () => {
-  const [loading, setLoading] = useState(false); 
   const [city, setCity] = useState(""); 
   const [data, setData] = useState(""); 
+  const [para, setPara] = useState("");
 
   const API_KEY = "2405418ad0804f70b25135006242008";
   const handleSearch = async () => {
-    setLoading(true);
+    setPara("Loading data…");
     setData("");
     try {
       const response = await axios.get( `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`);
@@ -17,9 +17,8 @@ const WeatherApp = () => {
     } catch (err) {
       alert("Failed to fetch weather data");
     }
-    setLoading(false);
+    setPara("");
   };
-
   return (
     <div className="app">
       <input
@@ -32,7 +31,7 @@ const WeatherApp = () => {
 
       <button onClick={handleSearch}>Search</button>
 
-      {loading && <p>Loading data…</p>}
+      {<p>{para}</p>}
 
       {data && (
         <div className="weather-cards">
